@@ -13,4 +13,5 @@ data_medal.py用于存储用户结果数据
 
 
 ## 使用
+编辑`1.py`, header1的"cookie" 填入你b站的cookie  
 安装相应的第三方库（aiohttp）后，`python 1.py` 即可。  

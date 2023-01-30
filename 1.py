@@ -15,7 +15,7 @@ data_medal_json = DATA_MEDAL
 header1 = {
     'content-type': 'text/plain; charset=utf-8',
     # 下方填入你的cookie喵
-    'cookie': "buvid3=FA0A27F9-013A-565C-E786-460DBC0B099794205infoc; b_nut=1672812193; _uuid=D8D2107A5-D9410-1054E-8CB2-26F45B6E895201028infoc; buvid_fp_plain=undefined; i-wanna-go-back=-1; hit-new-style-dyn=0; hit-dyn-v2=1; dy_spec_agreed=1; LIVE_BUVID=AUTO6516729151672170; CURRENT_FNVAL=4048; rpdid=|(umRk|YRl~k0J'uY~kmJRJJu; buvid4=01EACFC4-6188-B683-B4A1-B144212C238B75877-022041118-8pvL0cFl5EhNFD0%2BiK411w%3D%3D; nostalgia_conf=-1; bp_video_offset_6170679=755481504860078100; bp_video_offset_679213705=755746431342477300; b_ut=5; bp_video_offset_3493128476560053=undefined; SESSDATA=85f628b1%2C1690369264%2C9c91f%2A12; bili_jct=3716d26cc36474b1128cfb9471653241; DedeUserID=3493128470268708; DedeUserID__ckMd5=6bbc6ae7979550ee; CURRENT_QUALITY=16; Hm_lvt_8a6e55dbd2870f0f5bc9194cddf32a02=1674737770,1674824526,1674911822,1674980056; PVID=1; bp_video_offset_3493128470268708=756588562745393300; innersign=1; fingerprint=248884ebea92ed37387eceeee20bcf48; sid=5qyjne5r; b_lsid=7894F3210_1860154250E; buvid_fp=248884ebea92ed37387eceeee20bcf48",
+    'cookie': "",
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 Core/1.94.186.400 QQBrowser/11.3.5195.400'
 }
 # 计数用
