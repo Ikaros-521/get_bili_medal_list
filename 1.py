@@ -15,7 +15,7 @@ data_medal_json = DATA_MEDAL
 header1 = {
     'content-type': 'text/plain; charset=utf-8',
     # 下方填入你的cookie喵
-    'cookie': "buvid3=03B61D80-728A-F624-4E0A-A4B4B08E7A4337263infoc; LIVE_BUVID=AUTO2316286811743991; b_nut=100; CURRENT_FNVAL=4048; _uuid=610858735-9F16-F1095-3725-2910F29F10E2E666516infoc; rpdid=|(umRk|YRl~k0J'uY~k)R|Y~|; buvid_fp_plain=undefined; i-wanna-go-back=-1; buvid4=3BAB2F68-8053-2774-F523-69F10688E42868094-023010421-FRmBv7s/ltlUOUm2FQ5gBA==; b_ut=5; hit-new-style-dyn=0; hit-dyn-v2=1; nostalgia_conf=-1; bp_video_offset_29358975=752554467477422100; fingerprint=ae8f5a001194a29f7643be0a7c85e267; DedeUserID=3493123013479368; DedeUserID__ckMd5=fada9586cce73bf3; buvid_fp=b2d4152d6ca63e49af48acb0698c70a2; bp_video_offset_3493123013479368=757874514610618400; PVID=1; b_lsid=2E26CA31_18610A5E06F; SESSDATA=2fef4700,1690870678,fa1b8*22; bili_jct=36d263eb09bd0b095dd16d6d000e9be9; sid=qkuwihbh",
+    'cookie': "",
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 Core/1.94.186.400 QQBrowser/11.3.5195.400'
 }
 # 计数用
