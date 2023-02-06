@@ -21,7 +21,7 @@ header1 = {
 # 计数用
 num = 0
 # 数据起始下标
-start_index = 4851
+start_index = 5331
 # 每获得1个新数据 就写入一次文件
 write_every_num = 1
 
