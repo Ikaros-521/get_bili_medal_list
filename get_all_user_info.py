@@ -3,18 +3,20 @@ import asyncio
 import aiohttp
 import random
 
-header1 = {
-    'content-type': 'text/plain; charset=utf-8',
-    # 下方填入你的cookie喵
-    'cookie': "",
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 Core/1.94.186.400 '
-}
+from config.config import CONFIG_JSON
 
-# 代理地址，没有就改成 proxys = None
-proxys = "http://127.0.0.1:10811"
+header1 = CONFIG_JSON["header"]
+
+# 代理地址，没有就改配置文件 proxy = []，或者直接 proxys = None
+if len(CONFIG_JSON["proxy"]) == 0:
+    proxys = None
+else:
+    proxys = CONFIG_JSON["proxy"][0]
 
 # 存储关注的用户数据
 user_info = []
+# 写入文件路径
+file_path = "data/ori_data.json"
 
 # 获取用户信息，传入uid 获取 昵称 直播间号
 async def get_user_info(uid):
@@ -44,19 +46,19 @@ async def main():
     # 每多少个新数据 就写入文件
     write_num = 10
     # 起始的uid
-    uid = 1903
+    uid = 7418
     # 延时 秒
-    wait_time = 1
+    wait_time = 3
     # 新数据计数
     num = 0
-    filename = "ori_data2.json"
 
-    with open(filename, "r", encoding="utf8") as f:
+    with open(file_path, "r", encoding="utf8") as f:
         user_info = json.load(f)
 
     print("len(user_info)=" + str(len(user_info)))
 
     while True:
+        random_time = float(random.randint(0, 100) / 1000)
         json1 = await get_user_info(uid)
         uid += 1
         try:
@@ -65,30 +67,43 @@ async def main():
                 # print("异常中止运行")
                 if json1["code"] == -401:
                     print("IP被禁 或 账号被限制请求，run")
+                    with open(file_path, 'w', encoding="utf-8") as file_object:
+                        file_object.write(json.dumps(user_info, ensure_ascii=False))
+                    file_object.close()
+                    print("write " + file_path + " over")
                     return
                 continue
 
             if "live_room" in json1["data"]:
-                temp_json = {"mid": json1["data"]["mid"], "uname": json1["data"]["name"], "roomid": json1["data"]["live_room"]["roomid"]}
-                
+                # print(json1["data"])
+                if json1["data"]["live_room"] != None:
+                    temp_json = {"mid": json1["data"]["mid"], "uname": json1["data"]["name"], "roomid": json1["data"]["live_room"]["roomid"]}
+                else:
+                    # print("没有直播间数据")
+                    continue
+
                 if temp_json in user_info:
+                    print("Already exists")
                     continue
                 else:
                     user_info.append(temp_json)
                     num += 1
+                    print(temp_json)
+            else:
+                print("don't have live_room")
 
             if num != 0 and num % write_num == 0:
-                with open(filename, 'w', encoding="utf-8") as file_object:
+                with open(file_path, 'w', encoding="utf-8") as file_object:
                     file_object.write(json.dumps(user_info, ensure_ascii=False))
                 file_object.close()
-                print("write " + filename + " over")
+                print("write " + file_path + " over")
 
-            random_time = float(random.randint(0, 100) / 1000)
             # print(random_time)
             await asyncio.sleep(wait_time + random_time)
         except (KeyError, TypeError, IndexError) as e:
             print(e)
             # print("异常中止运行")
+            await asyncio.sleep(wait_time + random_time)
             continue
 
 

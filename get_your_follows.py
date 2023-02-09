@@ -3,13 +3,12 @@ import asyncio
 import aiohttp
 import time
 
-header1 = {
-    'content-type': 'text/plain; charset=utf-8',
-    # 下方填入你的cookie喵
-    'cookie': "",
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 Core/1.94.186.400 QQBrowser/11.3.5195.400'
-}
+from config.config import CONFIG_JSON
 
+# config配置你的cookie
+header1 = CONFIG_JSON["header"]
+# 填入你的uid
+your_uid = "3493123013479368"
 # 存储关注的用户数据
 user_info = []
 
@@ -56,15 +55,12 @@ async def get_room_id(uid):
 
 
 async def main():
-    # 填入你的uid
-    uid = "3493123013479368"
-
     num = -1
     page_size = 50
 
     while True:
         num += 1
-        json1 = await get_follows(uid, (num + 1), page_size)
+        json1 = await get_follows(your_uid, (num + 1), page_size)
         try:
             if json1["code"] != 0:
                 print(json1)

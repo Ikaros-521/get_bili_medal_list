@@ -1,5 +1,5 @@
-from data import DATA
-from data_medal import DATA_MEDAL
+from data.data import DATA
+from data.data_medal import DATA_MEDAL
 
 # 存储下标
 index = -1
