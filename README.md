@@ -4,18 +4,20 @@
 
 ## 目录结构
 
-get_all_user_info.py 爬取全b站用户数据，数据写入ori_data.json  
-update_data_medal.py 用于获取主播牌子信息写入data_medal.py  
-get_data_medal_last_index.py 用于获取已经加载的最后一个的牌子所对应的data下标  
-update_data.py 用于将新的vtbs.moe的主播数据，追加入旧的data.py中  
+`get_all_user_info.py` 爬取全b站用户数据，数据写入ori_data.json  
+`update_data_medal.py` 用于获取主播牌子信息写入data_medal.py  
+`get_data_medal_last_index.py` 用于获取已经加载的最后一个的牌子所对应的data下标  
+`update_data.py` 用于将新的vtbs.moe的主播数据，追加入旧的data.py中  
 
-data/ori_data.json 存储最新获取的vtbs.moe的主播数据  
-data/new_data.py 测试用data.py的备份文件  
-data/data.py 数据源自vtbs.moe + 爬虫追加  
-data/data_medal.py 用于存储用户结果数据  
-data/follows.json 爬取的个人关注数据，存储文件  
+`data/ori_data.json` 存储最新获取的vtbs.moe的主播数据  
+`data/new_data.py` 测试用data.py的备份文件  
+`data/data.py` 数据源自vtbs.moe + 爬虫追加  
+`data/data_medal.py` 用于存储用户结果数据  
+`data/follows.json` 爬取的个人关注数据，存储文件  
+`data/country.json` 存储各国号码信息  
+`data/smstome_phone_list.txt` 存储从smstome爬取的所有的号码接收链接  
 
-config/config.py 配置请求头，填入你的cookie  
+`config/config.py` 配置请求头，填入你的cookie，或者代理地址  
 
 
 ## API
@@ -49,6 +51,17 @@ config/config.py 配置请求头，填入你的cookie
 
 ### 3、使用login_get_cookie.py短信登录程序获取
 项目根目录运行`python login_get_cookie.py`，根据提示完成短信验证登录。  
+期间需要访问[http://geetest.colter.top/](http://geetest.colter.top/)，传入`gt`和`challenge`完成手动的极验校验，获取`validate`和`seccode`。  
+最后需要填入手机验证码完成登录即可。  
+ps：`python login_get_cookie.py 1`，优化了`validate`和`seccode`的输入，请自行选择执行。  
+
+# 拓展
+
+## 免费接码平台
+
+### [smstome.com](https://smstome.com) 
+1、执行`python sms.py`，获取站点所有号码的短信接收链接，存储于`data/smstome_phone_list.txt`  
+2、执行`python sms.py 12345678`，后面传入的是号码，获取此号码接收到的最新的2条短信。  
 
 # 参考
 [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)  

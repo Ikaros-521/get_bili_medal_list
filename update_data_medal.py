@@ -162,14 +162,14 @@ if __name__ == "__main__":
     # 每获得1个新数据 就写入一次文件
     write_every_num = 10
     # 请求间隔延时
-    sleep_time = 0.5
+    sleep_time = 0.1
     # 写入文件路径
     file_path = "data/data_medal.py"
 
     # 自动获取最后一个的下标 错乱了的话 建议手动填写
     start_index = get_data_medal_last_index()
 
-    start_index = 18234
+    # start_index = 18234
 
     print("当前牌子总数：" + str(len(DATA_MEDAL)))
     print("当前用户数据总数：" + str(len(DATA)))

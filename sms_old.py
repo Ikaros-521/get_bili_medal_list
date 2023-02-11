@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import sys
 import asyncio
 import aiohttp
-from playwright.async_api import async_playwright
 
 header1 = {
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -28,47 +27,42 @@ def has_duplicate(filename, content):
 
 
 async def get_smstome_code(url):
-    try:
-        async with async_playwright() as playwright:
-            browser = await playwright.chromium.launch()
-            context = await browser.new_context()
-            page = await context.new_page()
-            await page.goto(url)
+    API_URL = url
+    async with aiohttp.ClientSession(headers=header1) as session:
+        try:
+            async with session.get(url=API_URL, headers=header1) as response:
+                if response.status != 200:
+                    response.raise_for_status()
+                ret = await response.text()
 
-            tbody = await page.query_selector("tbody")
-            if tbody:
-                tr_list = await tbody.query_selector_all("tr")
-                for i in range(2):
-                    tr = tr_list[1 - i]
-                    td_list = await tr.query_selector_all("td")
-                    from_td = await td_list[0].text_content()
-                    received_td = await td_list[1].text_content()
-                    message_td = await td_list[2].text_content()
-                    from_value = from_td.strip()
-                    received_value = received_td.strip()
-                    message_value = message_td.strip()
+                soup = BeautifulSoup(ret, 'html.parser')
+
+                # print(soup)
+
+                trs = soup.select('table.messagesTable tbody tr')
+                for tr in trs[::-1]:
+                    # print(tr)
+
+                    from_td = tr.select_one('td:nth-of-type(1)')
+                    from_value = from_td.text.strip()
+                    received_td = tr.select_one('td:nth-of-type(2)')
+                    received_value = received_td.text.strip()
+                    message_td = tr.select_one('td:nth-of-type(3)')
+                    message_value = message_td.text.strip()
                     # 针对b站的短信做了检索，不想要的话可以注释了
-                    code = message_value.split('[bilibili]')[-1].split('短信登录验证码')[0]
-
-                    print('源自:', from_value)
-                    print('接收时间:', received_value)
-                    print('验证码:', code)
+                    # code = message_value.split('[bilibili]')[-1]
+                    print('From:', from_value)
+                    print('Received:', received_value)
+                    print('Code:', message_value)
                     print("\n")
-                
-                    if i == -4:  # 只打印倒序的三个
-                        break
-            else:
-                print("[出错]tbody not found.")
 
-            phone = url.split('/phone/')[1].split('/sms/')[0]
-            print("号码：" + phone)
-
-            await browser.close()
-
-            return True
-    except Exception as e:
-        print(e)
-        return False
+                phone = url.split('/phone/')[1].split('/sms/')[0]
+                print("号码：" + phone)
+        except aiohttp.ClientError as e:
+            print(e)
+            return False
+            
+    return True
 
 
 # 获取smstome.com的号码接受url，传入 url的国家路径

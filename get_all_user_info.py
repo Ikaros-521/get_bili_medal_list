@@ -55,7 +55,7 @@ async def main():
     # 每多少个新数据 就写入文件
     write_num = 10
     # 起始的uid
-    uid = 74847
+    uid = 103507
     # 延时 秒
     wait_time = 0.5
     # 新数据计数
@@ -71,6 +71,7 @@ async def main():
 
     with open(file_path, "r", encoding="utf8") as f:
         user_info = json.load(f)
+    f.close()
 
     print("len(user_info)=" + str(len(user_info)))
 

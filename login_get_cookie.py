@@ -1,7 +1,7 @@
 import json
 import asyncio
 import aiohttp
-import time
+import sys, re
 from itertools import islice
 
 header1 = {
@@ -110,6 +110,13 @@ async def main():
     }
 
     print(banner + "\n")
+
+    # 获取命令行传入的参数
+    args = sys.argv
+
+    # 输出命令行传入的参数
+    # print(args)
+
     country_id = input("请输入手机的国家代码(不填默认 86)：")
     tel = input("请输入手机号码：")
 
@@ -145,8 +152,15 @@ async def main():
         print("challenge=\n" + post_data1["challenge"])
         print("\n")
 
-        validate = input("请输入验证后的validate：")
-        seccode = input("请输入验证后的seccode：")
+        # 传参 不传参则是普通模式；传入1个参数 任何内容，则定制优化模式
+        if len(args) >= 2:
+            validate_seccode = input("请输入快捷复制的validate&seccode：")
+            match = re.search('validate=(.*)&seccode=(.*)', validate_seccode)
+            validate = match.group(1)
+            seccode = match.group(2)
+        else:
+            validate = input("请输入验证后的validate：")
+            seccode = input("请输入验证后的seccode：")
 
         if validate == "" or seccode == "":
             print("空值是达咩的啦~如果验证失败，可以重新运行重试~")
