@@ -37,4 +37,18 @@ config/config.py 配置请求头，填入你的cookie
 
 ### 4、依赖data.py生成data_medal.py的牌子数据
 编辑`update_data_medal.py`, header1的"cookie" 填入你b站的cookie，步骤3输出的index填入`start_index`(默认自动执行第三步)  
-安装相应的第三方库（aiohttp）后，`python update_data_medal.py` 即可。
+安装相应的第三方库（aiohttp）后，`python update_data_medal.py` 即可。  
+
+## 获取Cookie
+
+### 1、浏览器获取
+浏览器登录b站，F12抓包，找请求里带cookie的，复制`SESSDATA`到`config.py`文件。  
+
+### 2、使用biliup软件
+项目根目录运行`.\biliup\biliup.exe login`，登录账号，生成`cookie.json`文件，复制里面的`SESSDATA`到`config.py`文件。  
+
+### 3、使用login_get_cookie.py短信登录程序获取
+项目根目录运行`python login_get_cookie.py`，根据提示完成短信验证登录。  
+
+# 参考
+[bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)  

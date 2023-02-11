@@ -140,8 +140,14 @@ async def main():
 if __name__ == "__main__":
     # 用于存储牌子数据
     data_medal_json = DATA_MEDAL
+    # cookie总数
+    cookie_total_num = len(CONFIG_JSON["cookies"])
+    # cookie下标
+    cookie_index = 0
 
     header1 = CONFIG_JSON["header"]
+    
+    header1["cookie"] = CONFIG_JSON["cookies"][cookie_index]
 
     # 代理地址，没有就改配置文件 proxy = []，或者直接 proxys = None
     if len(CONFIG_JSON["proxy"]) == 0:
@@ -156,15 +162,19 @@ if __name__ == "__main__":
     # 每获得1个新数据 就写入一次文件
     write_every_num = 10
     # 请求间隔延时
-    sleep_time = 1
+    sleep_time = 0.5
     # 写入文件路径
     file_path = "data/data_medal.py"
 
     # 自动获取最后一个的下标 错乱了的话 建议手动填写
     start_index = get_data_medal_last_index()
 
+    start_index = 18234
+
     print("当前牌子总数：" + str(len(DATA_MEDAL)))
     print("当前用户数据总数：" + str(len(DATA)))
 
     print("开始获取牌子数据")
-    asyncio.run(main())
+    
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
