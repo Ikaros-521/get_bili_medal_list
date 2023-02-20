@@ -8,7 +8,7 @@ from config.config import CONFIG_JSON
 # config配置你的cookie
 header1 = CONFIG_JSON["header"]
 # 填入你的uid
-your_uid = "3493123013479368"
+your_uid = ""
 # 存储关注的用户数据
 user_info = []
 

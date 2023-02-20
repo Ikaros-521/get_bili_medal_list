@@ -8,6 +8,11 @@
 `update_data_medal.py` 用于获取主播牌子信息写入data_medal.py  
 `get_data_medal_last_index.py` 用于获取已经加载的最后一个的牌子所对应的data下标  
 `update_data.py` 用于将新的vtbs.moe的主播数据，追加入旧的data.py中  
+`get_your_follows.py` 用于获取你的关注的用户信息  
+
+`login_get_cookie.py` 用于使用短信登录方式登录b站获取cookie  
+
+`sms.py` 用于smstome的虚拟号码和进行短信提取  
 
 `data/ori_data.json` 存储最新获取的vtbs.moe的主播数据  
 `data/new_data.py` 测试用data.py的备份文件  
